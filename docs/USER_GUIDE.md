@@ -4,6 +4,8 @@ This guide explains how to run Rolepath and how to use the main workflows.
 
 ## 1. Start the application
 
+The GitHub repository starts blank. It does not include anyone else's jobs, profile, tokens, resumes, or local sessions. Each user creates their own local `data.json` and profile data after running the app.
+
 From the repository folder:
 
 ```powershell

@@ -105,6 +105,8 @@ Starts the Express API. With `NODE_ENV=production`, it also serves the built fro
 
 Rolepath is designed as a single-user local app.
 
+- The repository is intentionally a blank application template.
+- No user jobs, resumes, tokens, Codex credentials, or local session data are committed.
 - Applications are stored locally in `data.json`.
 - Your profile is stored in browser local storage.
 - Uploaded resumes are processed in memory. Original files are not stored.
@@ -116,6 +118,7 @@ Rolepath is designed as a single-user local app.
 The following local/runtime files are intentionally ignored by git:
 
 - `.env`
+- `.env.*`, except `.env.example`
 - `data.json`
 - `.rolepath-session.json`
 - `node_modules/`

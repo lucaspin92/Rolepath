@@ -54,7 +54,7 @@ export function Sidebar({ page, setPage, counts, mobileOpen, close }) {
   const items = [["dashboard", Home, "Overview"], ["applications", LayoutList, "Applications", counts.all], ["interviews", CalendarDays, "Interviews", counts.interviews]];
   return <>{mobileOpen && <button className="sidebar-backdrop" onClick={close} aria-label="Close menu" />}<aside className={`sidebar ${mobileOpen ? "open" : ""}`}>
     <Logo /><nav><p className="nav-label">Workspace</p>{items.map(([id, Icon, label, count]) => <button key={id} className={page === id ? "active" : ""} onClick={() => { setPage(id); close(); }}><Icon size={17} /><span>{label}</span>{count > 0 && <b>{count}</b>}</button>)}<p className="nav-label second">Account</p><button onClick={() => { setPage("profile"); close(); }} className={page === "profile" ? "active" : ""}><UserRound size={17} /><span>My profile</span></button></nav>
-    <div className="sidebar-tip"><span><Sparkles size={14} /> Small advantage</span><p>Tailor one achievement to each role. Specific beats impressive.</p></div><button className={`settings-link ${page === "settings" ? "active" : ""}`} onClick={() => { setPage("settings"); close(); }}><Settings size={16} /> Settings</button><span className="app-version">V 1.0</span>
+    <div className="sidebar-tip"><span><Sparkles size={14} /> Small advantage</span><p>Tailor one achievement to each role. Specific beats impressive.</p></div><button className={`settings-link ${page === "settings" ? "active" : ""}`} onClick={() => { setPage("settings"); close(); }}><Settings size={16} /> Settings</button><span className="app-version">V 1.0.1</span>
   </aside></>;
 }
 export function Header({ title, subtitle, onAdd, menu }) {

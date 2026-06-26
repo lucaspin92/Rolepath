@@ -28,6 +28,12 @@ export default function ProfilePage({ profile, setProfile, aiEnabled, openSettin
     setTimeout(() => setSaved(false), 1800);
   }
 
+  function updateField(key, value) {
+    const next = { ...draft, [key]: value };
+    persist(next);
+    setSaved(false);
+  }
+
   async function importResume(file) {
     if (!file) return;
     setUploading(true); setUploadError(""); setImportResult(null);
@@ -47,7 +53,7 @@ export default function ProfilePage({ profile, setProfile, aiEnabled, openSettin
 
   function field(key, options = {}) {
     const missing = importResult?.missingFields?.includes(key);
-    const common = { value: draft[key] || "", onChange: (event) => setDraft({ ...draft, [key]: event.target.value }), placeholder: options.placeholder || "" };
+    const common = { value: draft[key] || "", onChange: (event) => updateField(key, event.target.value), placeholder: options.placeholder || "" };
     return <label className={`${options.full ? "full" : ""} ${missing ? "missing-field" : ""}`}><span>{fieldLabels[key]}{missing && <small>Not found — add manually</small>}</span>{options.textarea ? <textarea {...common} className={options.tall ? "tall" : ""} /> : <input {...common} type={options.type || "text"} />}</label>;
   }
 

@@ -1,0 +1,27 @@
+{
+  "name": "rolepath",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev-session.js",
+    "stop": "node scripts/dev-session.js --stop",
+    "build": "vite build",
+    "test": "node --test",
+    "start": "node --env-file-if-exists=.env server.js"
+  },
+  "dependencies": {
+    "@openai/codex-sdk": "^0.142.0",
+    "@vitejs/plugin-react": "latest",
+    "express": "latest",
+    "jspdf": "^4.2.1",
+    "lucide-react": "latest",
+    "mammoth": "^1.12.0",
+    "multer": "^2.2.0",
+    "pdf-parse": "^2.4.5",
+    "react": "latest",
+    "react-dom": "latest",
+    "vite": "latest",
+    "word-extractor": "^1.0.4"
+  }
+}

@@ -1,0 +1,14 @@
+import React from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.jsx";
+import "./base.css";
+import "./screens.css";
+import "./interviews.css";
+import "./resume.css";
+import "./chat.css";
+import "./v3.css";
+import "./settings.css";
+import "./kanban.css";
+import "./confirm.css";
+import "./ai-errors.css";
+createRoot(document.getElementById("root")).render(<React.StrictMode><App /></React.StrictMode>);

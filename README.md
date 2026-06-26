@@ -1,57 +1,142 @@
 # Rolepath
 
-Rolepath is a private, local-first workspace for job applications. Paste a job link or description and it turns the posting into structured notes, a saved cover-letter draft, and realistic interview preparation.
+Rolepath is a private, local-first workspace for managing job applications. Paste a job link or description and Rolepath turns it into structured role notes, a saved cover letter draft, interview preparation, and an application pipeline.
 
-## What it includes
+Version: **1.0**
 
-- Kanban application pipeline with drag-and-drop stages, search, and deletion
-- Resume import for PDF, DOCX, and legacy DOC with automatic profile population
-- Job-link ingestion with server-side fetching and private-network protection
-- Structured role details, requirements, skills, benefits, fit signals, and gaps
-- Saved cover letters grounded in your profile and the job post
-- A Codex opportunity copilot that can discuss and update role details, cover letters, questions, and answers
-- Multiple interview rounds and role-specific interview preparation
-- Local fallback tools when Codex is not connected
+## Features
 
-## Run it
+- Kanban application board with drag-and-drop stages
+- Application deletion with native in-app confirmation dialogs
+- Job post analysis from a URL or pasted description
+- Live analysis progress while the agent works
+- Original job link and description saved behind a collapsible detail section
+- Resume import from PDF, DOCX, and legacy DOC
+- Profile auto-fill from resume content, with manual editing for missing fields
+- Saved cover letter generation with PDF export
+- Interview question generation and saved draft answers
+- Multi-phase interview tracking
+- Opportunity copilot powered by local Codex authentication
+- Local fallback extraction when Codex is unavailable
 
-1. Install dependencies:
+## Requirements
 
-   ```powershell
-   npm install
-   ```
+- Node.js 20 or newer
+- npm
+- A local Codex login if you want AI features
 
-2. Connect Codex using your ChatGPT account:
+Rolepath intentionally does **not** use an OpenAI API key. It uses the Codex CLI/SDK with your local ChatGPT sign-in.
 
-   ```powershell
-   npx codex login
-   ```
+## Quick start
 
-   Choose **Sign in with ChatGPT**. Rolepath deliberately ignores API-key authentication.
+Clone the repository:
 
-3. Start Rolepath:
+```powershell
+git clone https://github.com/lucaspin92/Rolepath.git
+cd Rolepath
+```
 
-   ```powershell
-   npm run dev
-   ```
+Install dependencies:
 
-4. Open `http://localhost:5173`. The Settings screen shows the Codex connection and setup instructions.
+```powershell
+npm install
+```
 
-To create a production build, run `npm run build`. To serve that build, set `NODE_ENV=production` and run `npm start`.
+Connect Codex:
 
-## How another user connects the agent
+```powershell
+npx codex login
+```
 
-Every user installs Rolepath locally, runs `npx codex login`, and signs in with their own ChatGPT account. The Codex CLI and SDK share that local authentication. Their Rolepath requests count against their own Codex subscription allowance; no OpenAI API key or separate API project billing is used.
+Choose **Sign in with ChatGPT**.
+
+Start Rolepath:
+
+```powershell
+npm run dev
+```
+
+Open the app:
+
+[http://127.0.0.1:5173](http://127.0.0.1:5173)
+
+The local API runs at:
+
+[http://localhost:8787](http://localhost:8787)
+
+## Useful commands
+
+```powershell
+npm run dev
+```
+
+Starts the local API and Vite frontend through Rolepath's dev session manager.
+
+```powershell
+npm run stop
+```
+
+Stops stale Rolepath API/frontend processes if a previous session closed unexpectedly.
+
+```powershell
+npm test
+```
+
+Runs the automated tests.
+
+```powershell
+npm run build
+```
+
+Creates a production build in `dist/`.
+
+```powershell
+npm start
+```
+
+Starts the Express API. With `NODE_ENV=production`, it also serves the built frontend.
+
+## Documentation
+
+- [User guide](docs/USER_GUIDE.md)
+- [Developer notes](docs/DEVELOPMENT.md)
 
 ## Data and privacy
 
-- Applications are stored in `data.json` on the user's machine.
-- The career profile is stored in that browser's local storage.
-- Uploaded resumes are processed in memory and the originals are not stored.
-- Codex authentication is managed by Codex on the local computer; Rolepath does not store credentials.
-- Job URLs are checked to block private/local network addresses before fetching.
-- Review every generated claim before using it in an application.
+Rolepath is designed as a single-user local app.
+
+- Applications are stored locally in `data.json`.
+- Your profile is stored in browser local storage.
+- Uploaded resumes are processed in memory. Original files are not stored.
+- Temporary rendered resume pages are deleted after extraction.
+- Codex authentication is managed locally by Codex. Rolepath does not store credentials.
+- Job URLs are checked to avoid fetching private/local network addresses.
+- Generated content should always be reviewed before use.
+
+The following local/runtime files are intentionally ignored by git:
+
+- `.env`
+- `data.json`
+- `.rolepath-session.json`
+- `node_modules/`
+- `dist/`
+
+## How another user connects the agent
+
+Each user runs Rolepath locally and signs in to Codex on their own computer:
+
+```powershell
+npx codex login
+```
+
+They should choose **Sign in with ChatGPT**. Their Rolepath AI requests use their own Codex/ChatGPT account allowance. No shared API key is required.
 
 ## Stack
 
-React, Vite, Express, the Codex SDK, and a lightweight JSON data store. The storage layer is intentionally simple for a single-user local app and can later be replaced with SQLite or Postgres for a hosted multi-user version.
+- React
+- Vite
+- Express
+- Codex SDK
+- Local JSON storage
+- `pdf-parse`, `mammoth`, and `word-extractor` for resume extraction
+- `jspdf` for cover letter PDF export
